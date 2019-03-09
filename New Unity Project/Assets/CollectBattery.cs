@@ -47,8 +47,9 @@ public class CollectBattery : MonoBehaviour
             if (jumpPointobj.GetComponent<JumpPoint>().readyToJump && Input.GetButtonDown("Jump"))
             {
                 ReadyText.GetComponent<Text>().text = "ジャンプ！";
-                GetComponent<Rigidbody>().AddForce(transform.up * 1000f);
+                //GetComponent<Rigidbody>().AddForce(transform.up * 1000f);
                 GetComponent<PlayerGravityBody>().attractorPlanet = null;
+                GetComponent<Jumping>().StartJumping();
                 isJumpOut = true;
             }
         }
