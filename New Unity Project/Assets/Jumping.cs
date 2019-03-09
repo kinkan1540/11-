@@ -11,7 +11,7 @@ public class Jumping : MonoBehaviour
     public GameObject targetConstellation;
 
     public float startJumpSpeed;
-    public float energy;
+    public float energyLost;
 
     public GameObject constellationCam;
 
@@ -40,7 +40,7 @@ public class Jumping : MonoBehaviour
             {
                 currectTarget = (currectTarget + 1) % targetPlanets.Length;
             }
-            startJumpSpeed -= energy * Time.deltaTime;
+            startJumpSpeed -= energyLost * Time.deltaTime;
             startJumpSpeed = Mathf.Max(startJumpSpeed, 0);
 
             pointTimer += (pointTimer + Time.deltaTime) % pointTime;
