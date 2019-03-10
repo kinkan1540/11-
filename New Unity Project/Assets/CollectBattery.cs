@@ -12,7 +12,7 @@ public class CollectBattery : MonoBehaviour
     public GameObject jumpPointobj;
     private bool isJumpOut;
 
-    private int batterycount;
+    public int batterycount { get; private set; }
 
     private void Start()
     {

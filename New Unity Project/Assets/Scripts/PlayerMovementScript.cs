@@ -9,21 +9,20 @@ public class PlayerMovementScript : MonoBehaviour {
 
     public float jumpForce;
     private bool isJumping;
-
     private Vector3 moveDirection;
     private Rigidbody rb;
-
+    private CollectBattery battery;
     public Animator playerAnimator;
+    public CollectBattery batteryCount;
 
     private void Start()
     {
+        batteryCount = gameObject.GetComponent<CollectBattery>();
         rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-
-
         if (allowUpDown)
         {
             moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
@@ -41,14 +40,12 @@ public class PlayerMovementScript : MonoBehaviour {
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + transform.TransformDirection(moveDirection) * moveSpeed * Time.deltaTime);
-        
+        rb.MovePosition(rb.position + transform.TransformDirection(moveDirection) * moveSpeed * Time.fixedDeltaTime);
         if(isJumping)
         {
             rb.AddForce(transform.up * jumpForce);
             isJumping = false;
             playerAnimator.SetBool("isJumping", false);
         }
-
     }
 }
