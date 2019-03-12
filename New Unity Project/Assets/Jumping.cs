@@ -10,14 +10,19 @@ public class Jumping : MonoBehaviour
     private int currectTarget;
     public GameObject targetConstellation;
 
+    
     public float startJumpSpeed;
     public float energyLost;
+
+    
 
     public GameObject constellationCam;
 
     public GameObject LinePrefab;
     public float pointTime;
-    private float pointTimer;
+    private float pointTimer=0f;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,39 +31,47 @@ public class Jumping : MonoBehaviour
         currectTarget = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void FixedUpdate()
     {
-        if(startJumping)
+        if (startJumping)
         {
-            if ((transform.position - targetPlanets[currectTarget].position).sqrMagnitude>=1)
+            if ((transform.position - targetPlanets[currectTarget].position).sqrMagnitude >= 1)
             {
-                Vector3 pos = Vector3.MoveTowards(transform.position, targetPlanets[currectTarget].position, startJumpSpeed * Time.deltaTime);
+                Vector3 pos = Vector3.MoveTowards(transform.position, targetPlanets[currectTarget].position, startJumpSpeed * Time.fixedDeltaTime);
                 GetComponent<Rigidbody>().MovePosition(pos);
             }
             else
             {
                 currectTarget = (currectTarget + 1) % targetPlanets.Length;
             }
-            startJumpSpeed -= energyLost * Time.deltaTime;
+            startJumpSpeed -= energyLost * Time.fixedDeltaTime;
             startJumpSpeed = Mathf.Max(startJumpSpeed, 0);
 
-            pointTimer += (pointTimer + Time.deltaTime) % pointTime;
-            if (pointTime < 0.1)
+            if (Time.time > pointTimer && startJumpSpeed != 0)
             {
                 Instantiate(LinePrefab, transform.position, Quaternion.identity);
+                pointTimer += pointTime;
             }
 
         }
+
     }
 
     public void StartJumping()
     {
+
         targetPlanets = targetConstellation.GetComponent<SetConstellation>().planets;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         startJumping = true;
 
+        pointTimer = Time.time;
         constellationCam.SetActive(true);
         GameObject.FindGameObjectWithTag("MainCamera").SetActive(false);
+
+        float total = targetConstellation.GetComponent<SetConstellation>().GetTotalLength();
+
+        //startJumpSpeed = Mathf.Sqrt(2 * energyLost * total);
+
     }
 }
