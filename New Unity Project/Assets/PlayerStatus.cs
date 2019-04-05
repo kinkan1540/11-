@@ -6,6 +6,7 @@ public class PlayerStatus : MonoBehaviour
 {
     public int Hp;
     public Text Batterytext;
+    public Text Score;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +14,8 @@ public class PlayerStatus : MonoBehaviour
     }
     void Update()
     {
-            Batterytext.text = "Hp：" + Hp;
+        Batterytext.text = "Hp：" + Hp;
+       Score.text = "Score" + Score.GetComponent<ScoreScript>().GetScore();
     }
     public int GetHp()
     {
@@ -27,6 +29,7 @@ public class PlayerStatus : MonoBehaviour
     {
         Hp += Recovery;
     }
+
     private void OnTriggerEnter(Collider other)
     {
   

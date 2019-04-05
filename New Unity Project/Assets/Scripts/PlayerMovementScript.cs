@@ -34,7 +34,7 @@ public class PlayerMovementScript : MonoBehaviour {
 
     public GameObject crater;
     public GameObject LinePrefab;
-    public int line;
+    public float line;
     private bool hitCube1 = false,hitCube2=false;
 
     private bool isJumping, jumpOne = false, jumptwo = false, jumpthree = false;
@@ -59,14 +59,14 @@ public class PlayerMovementScript : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                line--;
+                line-=0.5f;
             }
         }
         if (!hitCube2)
         {
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                line++;
+                line+=0.5f;
             }
         }
     }
@@ -147,7 +147,7 @@ public class PlayerMovementScript : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         GameObject _parent = other.transform.gameObject;
-        if (other.name == "crater2(Clone)")
+        if (other.name == "crater(Clone)")
         {
             if (hitobj != null)
                 return;
@@ -169,6 +169,7 @@ public class PlayerMovementScript : MonoBehaviour {
             line--;
             hitCube2 = true;
         }
+
     }
     private void OnTriggerStay(Collider other)
     {
@@ -185,7 +186,7 @@ public class PlayerMovementScript : MonoBehaviour {
         {
             hitCube2 = false;
         }
-        if(other.name == "crater2(Clone)")
+        if(other.name == "crater(Clone)")
         {
             if (hitobj !=null)
             {
@@ -215,7 +216,7 @@ public class PlayerMovementScript : MonoBehaviour {
         isJumping = true;
 
     }
-    public int Getline()
+    public float Getline()
     {
         return line;
     }

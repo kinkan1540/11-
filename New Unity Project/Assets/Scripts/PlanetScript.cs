@@ -7,7 +7,7 @@ public class PlanetScript : MonoBehaviour {
     //重力　G
     public float gravity = -10;
 
-    public void Attract(Transform playerTransform,int line)
+    public void Attract(Transform playerTransform,float line)
     {
    
 

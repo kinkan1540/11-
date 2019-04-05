@@ -8,8 +8,7 @@ public class Control : MonoBehaviour
     public int distanciaMax;
     private Vector3 offset;
     private int distancia;
-    private int rot;
-   // private int rot;
+   private int rot;
     public GameObject target2;
 
 
@@ -17,7 +16,9 @@ public class Control : MonoBehaviour
     {
 
         distancia = 1;
-        rot = 0;
+        
+      rot = 0;
+
     }
     void Update()
     {
