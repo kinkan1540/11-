@@ -7,6 +7,9 @@ public class SetConstellation : MonoBehaviour
 
     public Transform[] planets;
 
+    public  float totalSpeed=890f;
+    public  float energyloss = 100f;
+
     public Transform startPlanetTrs;
     // Start is called before the first frame update
 

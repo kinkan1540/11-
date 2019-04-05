@@ -23,6 +23,14 @@ public class Jumping : MonoBehaviour
     private float pointTimer=0f;
 
 
+    public float energyLevel;
+    public float speedLevel;
+    public float centerLevel;
+
+    private float energyscore;
+    private float speedscore;
+    private float centerscore;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +46,7 @@ public class Jumping : MonoBehaviour
         {
             if ((transform.position - targetPlanets[currectTarget].position).sqrMagnitude >= 1)
             {
+                transform.LookAt(targetPlanets[currectTarget]);
                 Vector3 pos = Vector3.MoveTowards(transform.position, targetPlanets[currectTarget].position, startJumpSpeed * Time.fixedDeltaTime);
                 GetComponent<Rigidbody>().MovePosition(pos);
             }
@@ -69,9 +78,22 @@ public class Jumping : MonoBehaviour
         constellationCam.SetActive(true);
         GameObject.FindGameObjectWithTag("MainCamera").SetActive(false);
 
-        float total = targetConstellation.GetComponent<SetConstellation>().GetTotalLength();
+
+        SetConstellation con = targetConstellation.GetComponent<SetConstellation>();
+        float total =con.GetTotalLength();
 
         //startJumpSpeed = Mathf.Sqrt(2 * energyLost * total);
 
+        //startJumpSpeed = con.totalSpeed * (speedscore * speedLevel + energyscore * energyLevel + centerscore * centerLevel);
+    }
+
+    private void ScoreJudge()
+    {
+        
+    }
+
+    private void CenterJudge()
+    {
+        //Vector3 dis
     }
 }

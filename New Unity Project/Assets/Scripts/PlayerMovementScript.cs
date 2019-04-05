@@ -30,7 +30,7 @@ public class PlayerMovementScript : MonoBehaviour {
         }
         else
         {
-            moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 1).normalized;
+            moveDirection = new Vector3(-Input.GetAxisRaw("Horizontal"), 0, 1).normalized;
         }
         if (Input.GetButtonDown("Jump")&&!isJumping)
         {
