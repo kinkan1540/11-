@@ -17,11 +17,12 @@ public class Jumping : MonoBehaviour
     
 
     public GameObject constellationCam;
+    public GameObject constellationCam2;
+
 
     public GameObject LinePrefab;
     public float pointTime;
     private float pointTimer=0f;
-
 
 
     // Start is called before the first frame update
@@ -38,6 +39,7 @@ public class Jumping : MonoBehaviour
         {
             if ((transform.position - targetPlanets[currectTarget].position).sqrMagnitude >= 1)
             {
+               // transform.LookAt(targetPlanets[currectTarget]);
                 Vector3 pos = Vector3.MoveTowards(transform.position, targetPlanets[currectTarget].position, startJumpSpeed * Time.fixedDeltaTime);
                 GetComponent<Rigidbody>().MovePosition(pos);
             }
@@ -54,6 +56,11 @@ public class Jumping : MonoBehaviour
                 pointTimer += pointTime;
             }
 
+            //if (startJumpSpeed == 0)
+            //{
+            //    constellationCam.SetActive(false);
+            //    constellationCam2.SetActive(true);
+            //}
         }
 
     }
@@ -66,8 +73,8 @@ public class Jumping : MonoBehaviour
         startJumping = true;
 
         pointTimer = Time.time;
-        constellationCam.SetActive(true);
-        GameObject.FindGameObjectWithTag("MainCamera").SetActive(false);
+      //  constellationCam.SetActive(true);
+      //  GameObject.FindGameObjectWithTag("MainCamera").SetActive(false);
 
         float total = targetConstellation.GetComponent<SetConstellation>().GetTotalLength();
 

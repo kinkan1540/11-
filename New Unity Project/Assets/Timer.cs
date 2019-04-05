@@ -16,21 +16,28 @@ public class Timer : MonoBehaviour
     //　前回Update時の秒数
     private float oldSeconds;
     private Text timerText;
-
+    private bool timerEnd = false;
+    private bool playerDaed = false;
     void Start()
     {
         totalTime = minute * 60 + seconds;
         oldSeconds = 0f;
         timerText = GetComponentInChildren<Text>();
+        playerDaed = false;
     }
 
     void Update()
     {
-        //　制限時間が0秒以下なら何もしない
-        if (totalTime <= 0f||GameObject.FindGameObjectWithTag("Player").GetComponent<CollectBattery>().IsJumpOut())
-        {
+        if (playerDaed)
             return;
+        //　制限時間が0秒以下なら何もしない
+        if (totalTime <= 0f|| GameObject.FindGameObjectWithTag("Player").GetComponent<CollectBattery>().IsJumpOut())
+        {
+            timerEnd = true;
+            return;
+
         }
+
         //　一旦トータルの制限時間を計測；
         totalTime = minute * 60 + seconds;
         totalTime -= Time.deltaTime;
@@ -45,5 +52,14 @@ public class Timer : MonoBehaviour
             timerText.text = minute.ToString("00") + ":" + ((int)seconds).ToString("00");
         }
         oldSeconds = seconds;
+        timerEnd = false;
+    }
+    public bool TimerEnd()
+    {
+        return timerEnd;
+    }
+    public void PlayerDaed()
+    {
+        playerDaed = true;
     }
 }

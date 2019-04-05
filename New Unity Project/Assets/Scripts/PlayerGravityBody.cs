@@ -19,7 +19,7 @@ public class PlayerGravityBody : MonoBehaviour {
     {
         if (attractorPlanet)
         {
-            attractorPlanet.Attract(playerTransform);
+            attractorPlanet.Attract(playerTransform,GetComponent<PlayerMovementScript>().Getline());
         }
     }
 }

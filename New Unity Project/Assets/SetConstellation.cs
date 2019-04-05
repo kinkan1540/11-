@@ -20,7 +20,7 @@ public class SetConstellation : MonoBehaviour
         {
             totallength += (planets[0].position - planets[1].position).magnitude;
         }
-        Debug.Log(totallength);
+
     }
     public float GetTotalLength()
     {
